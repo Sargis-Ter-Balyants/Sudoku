@@ -1,3 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 body {
     margin: 0;
+    height: 100vh;
+}
+
+.roboto-400 {
+    font-family: "Roboto", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.dancing-script-400 {
+    font-family: "Dancing Script", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#root {
+    height: 100%;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        text-align: center;
+        font-size: 5vw;
+        margin-top: 0;
+    }
 }

@@ -1,0 +1,19 @@
+.grid {
+    width: 50vw;
+    height: 50vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11%, 1fr));
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+
+    .grid-item {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ddd;
+    }
+}
