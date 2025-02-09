@@ -1,20 +1,13 @@
 import React, { ReactElement } from "react";
 import "./Grid.scss";
-import { generateRandomNumbersArray } from "../../utils/generateRandomNumbersArray";
+import { generateRandomSudokuNumbers } from "../../utils/generateSudokuNumbers";
 
 const Grid = () => {
-    console.log("Here");
-    const generateRandomSudokuNumbers = () => {
-        const sudokuNumbers: number[] = [];
-        const firstRow: number[] = generateRandomNumbersArray();
-        sudokuNumbers.push(...firstRow);
-
-        return sudokuNumbers;
-    };
-
     const renderGrid = () => {
         const grid: ReactElement[] = [];
-        const numbers: number[] = generateRandomSudokuNumbers();
+        const numbers: number[][] = generateRandomSudokuNumbers();
+        console.log(numbers);
+        const flatNumbers: number[] = numbers.flat();
 
         for (let i = 0; i < 81; i++) {
             grid.push(
@@ -22,7 +15,7 @@ const Grid = () => {
                     className="grid-item"
                     key={i}
                 >
-                    {numbers[i]}
+                    {flatNumbers[i]}
                 </div>
             );
         }
