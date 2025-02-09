@@ -1,6 +1,6 @@
 .grid {
-    width: 50vw;
-    height: 50vw;
+    width: 35vw;
+    height: 35vw;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(11%, 1fr));
     padding: 1rem;
@@ -15,5 +15,35 @@
         align-items: center;
         justify-content: center;
         border: 1px solid #ddd;
+        font-size: 1.5vw;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .grid {
+        width: 50vw;
+        height: 50vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .grid {
+        width: 70vw;
+        height: 70vw;
+
+        .grid-item {
+            font-size: 2vw;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .grid {
+        width: 90vw;
+        height: 90vw;
+
+        .grid-item {
+            font-size: 3vw;
+        }
     }
 }

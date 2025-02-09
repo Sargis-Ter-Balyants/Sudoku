@@ -32,7 +32,26 @@ main {
 
     h1 {
         text-align: center;
+        font-size: 3vw;
+        margin: 0;
+        margin-bottom: 1vw;
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    main h1 {
+        font-size: 4vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    main h1 {
         font-size: 5vw;
-        margin-top: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    main h1 {
+        font-size: 6vw;
     }
 }
