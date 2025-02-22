@@ -19,6 +19,8 @@ const GridItem = ({ isPenSelected, isEraserSelected, isCovered, value, index, it
     const guessedNumber = item.guessedNumber;
 
     const clickOnGridItem = (index: number) => {
+        if (!item.isCovered) return;
+
         if (isPenSelected) {
             setGridDiv((prev) =>
                 prev.map((item, i) => {

@@ -3,6 +3,7 @@ import "./Grid.scss";
 import { generateRandomSudokuNumbers } from "../../utils/generateHorizontalSudokuLine";
 import GridItem from "../GridItem/GridItem";
 import ToolBar from "../ToolBar/ToolBar";
+import NumberBar from "../NumberBar/NumberBar";
 
 interface ToolContextType {
     isPenSelected: boolean;
@@ -63,6 +64,7 @@ const Grid = () => {
                     setIsEraserSelected,
                 }}
             >
+                <NumberBar setGridDiv={setGridDiv} />
                 <div className="grid">
                     {gridDiv.map((item: GridItemType, index: number) => {
                         return (
