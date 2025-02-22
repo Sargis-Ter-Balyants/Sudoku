@@ -19,9 +19,14 @@ export type GridItemType = {
     isCovered: boolean;
 };
 
+interface Props {
+    difficulty: number;
+    generate: boolean;
+}
+
 export const ToolContext = React.createContext<ToolContextType | undefined>(undefined);
 
-const Grid = () => {
+const Grid = ({ difficulty, generate }: Props) => {
     const [gridDiv, setGridDiv] = React.useState<GridItemType[]>([]);
     const [isPenSelected, setIsPenSelected] = useState<boolean>(true);
     const [isEraserSelected, setIsEraserSelected] = useState<boolean>(false);
@@ -31,7 +36,7 @@ const Grid = () => {
         const flatNumbers: number[] = numbers.flat();
 
         const grid: GridItemType[] = flatNumbers.map((num, i) => {
-            const isCovered = Math.random() > 0.5;
+            const isCovered = Math.random() > difficulty;
 
             return {
                 element: (
@@ -52,7 +57,7 @@ const Grid = () => {
         });
 
         setGridDiv(grid);
-    }, []);
+    }, [difficulty, generate]);
 
     return (
         <div className="grid-container">
