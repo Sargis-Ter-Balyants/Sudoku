@@ -1,5 +1,6 @@
 .grid-container {
     display: flex;
+    align-items: center;
 
     .grid {
         width: 35vw;
@@ -45,7 +46,7 @@
             height: 85vw;
 
             .grid-item {
-                font-size: 3vw;
+                font-size: 4vw;
             }
 
             aside {
