@@ -1,43 +1,86 @@
-import React, { ReactElement } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import "./Grid.scss";
 import { generateRandomSudokuNumbers } from "../../utils/generateHorizontalSudokuLine";
-import { FaEraser, FaPen } from "react-icons/fa";
+import GridItem from "../GridItem/GridItem";
+import ToolBar from "../ToolBar/ToolBar";
+
+interface ToolContextType {
+    isPenSelected: boolean;
+    isEraserSelected: boolean;
+    setIsPenSelected: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsEraserSelected: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type GridItemType = {
+    element: JSX.Element;
+    isClickedWithPen: boolean;
+    guessedNumber: number | undefined;
+    isCovered: boolean;
+};
+
+export const ToolContext = React.createContext<ToolContextType | undefined>(undefined);
 
 const Grid = () => {
-    const renderGrid = () => {
-        const grid: ReactElement[] = [];
+    const [gridDiv, setGridDiv] = React.useState<GridItemType[]>([]);
+    const [isPenSelected, setIsPenSelected] = useState<boolean>(true);
+    const [isEraserSelected, setIsEraserSelected] = useState<boolean>(false);
+
+    useEffect(() => {
         const numbers: number[][] = generateRandomSudokuNumbers();
         const flatNumbers: number[] = numbers.flat();
 
-        for (let i = 0; i < 81; i++) {
+        const grid: GridItemType[] = flatNumbers.map((num, i) => {
             const isCovered = Math.random() > 0.5;
 
-            grid.push(
-                <div
-                    className={`grid-item ${isCovered ? "covered" : ""}`}
-                    key={i}
-                >
-                    {isCovered ? "" : flatNumbers[i]}
-                </div>
-            );
-        }
+            return {
+                element: (
+                    <GridItem
+                        value={num}
+                        isCovered={isCovered}
+                        index={i}
+                        setGridDiv={() => {}}
+                        isPenSelected={true}
+                        isEraserSelected={false}
+                        item={undefined}
+                    />
+                ),
+                isClickedWithPen: false,
+                guessedNumber: undefined,
+                isCovered,
+            };
+        });
 
-        return grid;
-    };
+        setGridDiv(grid);
+    }, []);
 
     return (
         <div className="grid-container">
-            <div className="grid">{renderGrid()}</div>
-            <aside>
-                <div>
-                    {FaPen({})}
-                    <span>Pen</span>
+            <ToolContext.Provider
+                value={{
+                    isPenSelected,
+                    isEraserSelected,
+                    setIsPenSelected,
+                    setIsEraserSelected,
+                }}
+            >
+                <div className="grid">
+                    {gridDiv.map((item: GridItemType, index: number) => {
+                        return (
+                            <GridItem
+                                isCovered={item.isCovered}
+                                value={item.element.props.value}
+                                index={index}
+                                key={index}
+                                setGridDiv={setGridDiv}
+                                isPenSelected={isPenSelected}
+                                isEraserSelected={isEraserSelected}
+                                item={item}
+                            />
+                        );
+                    })}
                 </div>
-                <div>
-                    {FaEraser({})}
-                    <span>Eraser</span>
-                </div>
-            </aside>
+                <ToolBar />
+            </ToolContext.Provider>
         </div>
     );
 };

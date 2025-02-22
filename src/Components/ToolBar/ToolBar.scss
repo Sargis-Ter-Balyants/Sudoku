@@ -1,0 +1,30 @@
+aside {
+    border: 1px solid #000;
+
+    & > div {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        box-sizing: border-box;
+        border-bottom: 1px solid #000;
+        transition: 0.5s;
+
+        &.selected {
+            background-color: #d3d3d3;
+        }
+
+        &:hover {
+            background-color: #ececec;
+            cursor: pointer;
+        }
+
+        & > svg {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+    }
+}

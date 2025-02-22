@@ -1,0 +1,43 @@
+.grid-item {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    font-size: 1.5vw;
+    box-sizing: border-box;
+
+    &:nth-of-type(3n):not(:nth-of-type(9n)) {
+        border-right: 1px solid #545454;
+    }
+
+    &:nth-of-type(n + 19):nth-of-type(-n + 27),
+    &:nth-of-type(n + 46):nth-of-type(-n + 54),
+    &:nth-of-type(n + 82):nth-of-type(-n + 90) {
+        border-bottom: 1px solid #545454;
+    }
+
+    &.covered {
+        background-color: #f5f5f5;
+    }
+
+    &.guessed {
+        background-color: #d8f6d8;
+    }
+
+    &.pen-clicked {
+        animation: borderWidthChange 1s infinite;
+    }
+}
+
+@keyframes borderWidthChange {
+    0% {
+        background-color: #f5f5f5;
+    }
+    50% {
+        background-color: rgb(250, 201, 110);
+    }
+    100% {
+        background-color: #f5f5f5;
+    }
+}
