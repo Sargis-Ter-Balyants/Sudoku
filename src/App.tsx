@@ -57,29 +57,7 @@ function App() {
                                 fontSize: "30px",
                             }}
                         >
-                            Sudoku generation went wrong 😊
-                        </p>
-                        <p
-                            style={{
-                                fontWeight: "bold",
-                                color: "black",
-                                backgroundColor: "white",
-                                padding: "10px",
-                                borderRadius: "8px",
-                            }}
-                        >
-                            My algorithm fails about 1 in 10 times, because of random generations
-                        </p>
-                        <p
-                            style={{
-                                fontWeight: "bold",
-                                color: "black",
-                                backgroundColor: "white",
-                                padding: "10px",
-                                borderRadius: "8px",
-                            }}
-                        >
-                            Currently trying to think of a better algorithm
+                            Something went wrong 😊
                         </p>
                         <p style={{ backgroundColor: "white", padding: "10px", borderRadius: "8px" }}>
                             Please try again
