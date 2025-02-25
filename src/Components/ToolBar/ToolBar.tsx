@@ -31,10 +31,15 @@ const ToolBar = ({ setGridDiv, setUntilWinCounter, currentActiveItemIndex }) => 
             prev.map((item: GridItemType, i: number) => {
                 if (currentActiveItemIndex === i) {
                     item.isCovered = false;
+                    item.isClickedWithPen = false;
                 }
+
+                item.guidingItem = false;
+
                 return item;
             })
         );
+        setUntilWinCounter((prev: number) => prev - 1);
     };
 
     return (
