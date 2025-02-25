@@ -3,7 +3,7 @@ import Grid from "./Components/Grid/Grid";
 import ErrorBoundary from "./Components/ErrorBoundry/ErrorBoundry";
 
 function App() {
-    const [difficulty, setDifficulty] = React.useState(0.9);
+    const [difficulty, setDifficulty] = React.useState(0.5);
     const [generate, setGenerate] = React.useState(false);
     const [win, setWin] = useState(false);
     const [lost, setLost] = useState(false);
