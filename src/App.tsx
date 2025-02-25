@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "./Components/Grid/Grid";
 import ErrorBoundary from "./Components/ErrorBoundry/ErrorBoundry";
 
 function App() {
-    const [difficulty, setDifficulty] = React.useState(0.5);
+    const [difficulty, setDifficulty] = React.useState(0.9);
     const [generate, setGenerate] = React.useState(false);
+    const [win, setWin] = useState(false);
+    const [lost, setLost] = useState(false);
+    const [untilWinCounter, setUntilWinCounter] = useState(0);
 
     return (
         <main>
@@ -16,15 +19,11 @@ function App() {
                         onChange={(e) => {
                             setDifficulty(parseFloat(e.target.value));
                         }}
+                        defaultValue={0.5}
                     >
                         <option value="0.9">Easy Peasy Lemon Squizy</option>
                         <option value="0.7">Easy</option>
-                        <option
-                            selected
-                            value="0.5"
-                        >
-                            Medium
-                        </option>
+                        <option value="0.5">Medium</option>
                         <option value="0.3">Hard</option>
                         <option value="0.1">Imposible</option>
                     </select>
@@ -32,23 +31,55 @@ function App() {
                 <button
                     onClick={() => {
                         setGenerate((prev) => !prev);
+                        setLost(false);
                     }}
                 >
                     New Sudoku
                 </button>
             </header>
-            <h1 className="dancing-script-400">SUDOKU WORLD</h1>
+            <h1 className="dancing-script-400">
+                {lost ? "It's Okay, Try again 😊" : win ? "🎉Congratulations🎉" : "SUDOKU WORLD"}
+            </h1>
             <ErrorBoundary
                 fallback={
                     <div style={{ textAlign: "center", marginTop: "20px", fontSize: "20px" }}>
-                        <p style={{ color: "yellowgreen", fontWeight: "bold", fontSize: "30px" }}>
+                        <p
+                            style={{
+                                backgroundColor: "white",
+                                padding: "10px",
+                                borderRadius: "8px",
+                                color: "yellowgreen",
+                                fontWeight: "bold",
+                                fontSize: "30px",
+                            }}
+                        >
                             Sudoku generation went wrong 😊
                         </p>
-                        <p style={{ fontWeight: "bold" }}>
+                        <p
+                            style={{
+                                fontWeight: "bold",
+                                color: "black",
+                                backgroundColor: "white",
+                                padding: "10px",
+                                borderRadius: "8px",
+                            }}
+                        >
                             My algorithm fails about 1 in 10 times, because of random generations
                         </p>
-                        <p style={{ fontWeight: "bold" }}>Currently trying to think of a better algorithm</p>
-                        <p>Please try again</p>
+                        <p
+                            style={{
+                                fontWeight: "bold",
+                                color: "black",
+                                backgroundColor: "white",
+                                padding: "10px",
+                                borderRadius: "8px",
+                            }}
+                        >
+                            Currently trying to think of a better algorithm
+                        </p>
+                        <p style={{ backgroundColor: "white", padding: "10px", borderRadius: "8px" }}>
+                            Please try again
+                        </p>
                         <button
                             onClick={() => window.location.reload()}
                             style={{
@@ -69,6 +100,11 @@ function App() {
                 <Grid
                     difficulty={difficulty}
                     generate={generate}
+                    win={win}
+                    setWin={setWin}
+                    setLost={setLost}
+                    untilWinCounter={untilWinCounter}
+                    setUntilWinCounter={setUntilWinCounter}
                 />
             </ErrorBoundary>
         </main>

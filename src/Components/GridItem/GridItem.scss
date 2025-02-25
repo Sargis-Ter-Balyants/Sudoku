@@ -6,6 +6,16 @@
     border: 1px solid #ddd;
     font-size: 1.5vw;
     box-sizing: border-box;
+    position: relative;
+    animation: forwards 1s init;
+
+    &:nth-of-type(odd) {
+        animation: forwards 1s animationLeft;
+    }
+
+    &:nth-of-type(even) {
+        animation: forwards 1s animationRight;
+    }
 
     &:nth-of-type(3n):not(:nth-of-type(9n)) {
         border-right: 1px solid #545454;
@@ -22,22 +32,65 @@
     }
 
     &.guessed {
-        background-color: #d8f6d8;
+        border-color: #7157d8;
     }
 
     &.pen-clicked {
         animation: borderWidthChange 1s infinite;
     }
+
+    &.win {
+        animation: win 2s infinite !important;
+    }
+
+    &.wrong-guess {
+        animation: wrongGuess 2s infinite !important;
+    }
+
+    .correct-answer {
+        position: absolute;
+        right: 3px;
+        bottom: 3px;
+        font-size: 1.2vw;
+    }
+}
+
+@keyframes animationLeft {
+    0% {
+        transform: translateX(-200%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes animationRight {
+    0% {
+        transform: translateX(200%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 @keyframes borderWidthChange {
-    0% {
-        background-color: #f5f5f5;
-    }
     50% {
         background-color: rgb(250, 201, 110);
     }
-    100% {
-        background-color: #f5f5f5;
+}
+
+@keyframes win {
+    50% {
+        background-color: rgb(58, 182, 77);
+        border-color: rgb(185, 255, 196);
+    }
+}
+
+@keyframes wrongGuess {
+    50% {
+        border-color: rgb(171, 23, 23);
+        background-color: #ffadad;
     }
 }

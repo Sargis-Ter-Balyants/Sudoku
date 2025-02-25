@@ -27,8 +27,8 @@
 @media only screen and (max-width: 1000px) {
     .grid-container {
         .grid {
-            width: 65vw;
-            height: 65vw;
+            width: 55vw;
+            height: 55vw;
 
             .grid-item {
                 font-size: 2vw;
@@ -42,8 +42,8 @@
         flex-direction: column;
 
         .grid {
-            width: 85vw;
-            height: 85vw;
+            width: 65vw;
+            height: 65vw;
 
             .grid-item {
                 font-size: 4vw;
@@ -51,6 +51,20 @@
 
             aside {
                 width: 10vw;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .grid-container {
+        .grid {
+            width: 95vw;
+            height: 95vw;
+            margin-bottom: 3vw;
+
+            .grid-item {
+                font-size: 4vw;
             }
         }
     }

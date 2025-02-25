@@ -3,11 +3,11 @@ aside {
     padding: 0 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 1.5vw;
 
     & > div {
-        width: 50px;
-        height: 50px;
+        width: 3.5vw;
+        height: 3.5vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -28,9 +28,8 @@ aside {
         }
 
         & > svg {
-            width: 30px;
-            height: 30px;
-            margin-bottom: 10px;
+            width: 2vw;
+            height: 2vw;
         }
     }
 }
@@ -42,8 +41,31 @@ aside {
         margin: 2vw 0;
 
         & > div {
+            width: 7vw;
+            height: 7vw;
             border: none;
             border-right: 1px solid #ddd;
+
+            & > svg {
+                width: 4vw;
+                height: 4vw;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    aside {
+        & > div {
+            width: 12vw;
+            height: 12vw;
+            border: none;
+            border-right: 1px solid #ddd;
+
+            & > svg {
+                width: 7vw;
+                height: 7vw;
+            }
         }
     }
 }

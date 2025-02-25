@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./GridItem.scss";
 import { GridItemType } from "../Grid/Grid";
 
@@ -10,16 +10,29 @@ interface Props {
     index: number;
     item: GridItemType | undefined;
     setGridDiv: React.Dispatch<React.SetStateAction<GridItemType[]>>;
+    setUntilWinCounter: React.Dispatch<React.SetStateAction<number>>;
+    win: boolean;
+    setLost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const GridItem = ({ isPenSelected, isEraserSelected, isCovered, value, index, item, setGridDiv }: Props) => {
-    if (!item) return null;
-
-    const penClicked = item.isClickedWithPen;
-    const guessedNumber = item.guessedNumber;
+const GridItem = ({
+    isPenSelected,
+    isEraserSelected,
+    isCovered,
+    value,
+    index,
+    item,
+    setGridDiv,
+    win,
+    setUntilWinCounter,
+    setLost,
+}: Props) => {
+    const penClicked = item?.isClickedWithPen;
+    const guessedNumber = item?.guessedNumber;
+    const lost = win && guessedNumber && guessedNumber !== value;
 
     const clickOnGridItem = (index: number) => {
-        if (!item.isCovered) return;
+        if (!item?.isCovered || win) return;
 
         if (isPenSelected) {
             setGridDiv((prev) =>
@@ -41,6 +54,7 @@ const GridItem = ({ isPenSelected, isEraserSelected, isCovered, value, index, it
                     return item;
                 })
             );
+            setUntilWinCounter((prev) => prev + 1);
         }
     };
 
@@ -54,13 +68,20 @@ const GridItem = ({ isPenSelected, isEraserSelected, isCovered, value, index, it
                 return item;
             })
         );
+        setUntilWinCounter((prev) => prev - 1);
     };
+
+    useEffect(() => {
+        if (lost) setLost(true);
+    }, [lost, setLost]);
+
+    if (!item) return null;
 
     return (
         <div
             className={`grid-item ${penClicked ? "pen-clicked" : ""}  ${isCovered ? "covered" : ""} ${
                 guessedNumber ? "guessed" : ""
-            }`}
+            } ${win ? "win" : ""} ${lost ? "wrong-guess" : ""}`}
             key={index}
             onClick={() => clickOnGridItem(index)}
             onKeyDown={(e) => {
@@ -83,7 +104,8 @@ const GridItem = ({ isPenSelected, isEraserSelected, isCovered, value, index, it
             }}
             tabIndex={0}
         >
-            {isCovered ? (guessedNumber ? guessedNumber : "") : value}
+            {lost ? <s>{guessedNumber}</s> : isCovered ? guessedNumber ? guessedNumber : "" : value}
+            {lost ? <span className="correct-answer">{value}</span> : null}
         </div>
     );
 };
