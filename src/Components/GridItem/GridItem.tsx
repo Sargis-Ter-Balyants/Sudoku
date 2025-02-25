@@ -30,6 +30,7 @@ const GridItem = ({
     const penClicked = item?.isClickedWithPen;
     const guessedNumber = item?.guessedNumber;
     const lost = win && guessedNumber && guessedNumber !== value;
+    const guidingItem = item?.guidingItem;
 
     const clickOnGridItem = (index: number) => {
         if (!item?.isCovered || win) return;
@@ -37,10 +38,30 @@ const GridItem = ({
         if (isPenSelected) {
             setGridDiv((prev) =>
                 prev.map((item, i) => {
+                    const row = Math.floor(index / 9);
+                    const col = index % 9;
+                    const boxRow = Math.floor(row / 3) * 3;
+                    const boxCol = Math.floor(col / 3) * 3;
+
+                    const itemRow = Math.floor(i / 9);
+                    const itemCol = i % 9;
+
                     item.isClickedWithPen = false;
+                    item.guidingItem = false;
+
                     if (i === index) {
                         item.isClickedWithPen = !penClicked;
                     }
+
+                    if (
+                        !penClicked &&
+                        (itemRow === row ||
+                            itemCol === col ||
+                            (itemRow >= boxRow && itemRow < boxRow + 3 && itemCol >= boxCol && itemCol < boxCol + 3))
+                    ) {
+                        item.guidingItem = true;
+                    }
+
                     return item;
                 })
             );
@@ -81,7 +102,7 @@ const GridItem = ({
         <div
             className={`grid-item ${penClicked ? "pen-clicked" : ""}  ${isCovered ? "covered" : ""} ${
                 guessedNumber ? "guessed" : ""
-            } ${win ? "win" : ""} ${lost ? "wrong-guess" : ""}`}
+            } ${win ? "win" : ""} ${lost ? "wrong-guess" : ""} ${guidingItem ? "guiding-bg" : ""}`}
             key={index}
             onClick={() => clickOnGridItem(index)}
             onKeyDown={(e) => {

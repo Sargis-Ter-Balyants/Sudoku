@@ -17,6 +17,7 @@ export type GridItemType = {
     isClickedWithPen: boolean;
     guessedNumber: number | undefined;
     isCovered: boolean;
+    guidingItem: boolean;
 };
 
 interface Props {
@@ -64,6 +65,7 @@ const Grid = ({ difficulty, generate, untilWinCounter, setUntilWinCounter, win, 
                 isClickedWithPen: false,
                 guessedNumber: undefined,
                 isCovered,
+                guidingItem: false,
             };
         });
 
