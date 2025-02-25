@@ -1,12 +1,12 @@
 import React from "react";
 import "./ToolBar.scss";
 import Tool from "../Tool/Tool";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaLightbulb, FaPencilAlt } from "react-icons/fa";
 import { LuEraser } from "react-icons/lu";
 import { GrPowerReset } from "react-icons/gr";
 import { GridItemType, ToolContext } from "../Grid/Grid";
 
-const ToolBar = ({ setGridDiv, setUntilWinCounter }) => {
+const ToolBar = ({ setGridDiv, setUntilWinCounter, currentActiveItemIndex }) => {
     const [isHoveringTools, setIsHoveringTools] = React.useState(false);
     const toolContext = React.useContext(ToolContext);
     if (!toolContext) {
@@ -24,6 +24,17 @@ const ToolBar = ({ setGridDiv, setUntilWinCounter }) => {
             })
         );
         setUntilWinCounter((prev: number) => prev + count);
+    };
+
+    const revealItem = () => {
+        setGridDiv((prev: GridItemType[]) =>
+            prev.map((item: GridItemType, i: number) => {
+                if (currentActiveItemIndex === i) {
+                    item.isCovered = false;
+                }
+                return item;
+            })
+        );
     };
 
     return (
@@ -57,6 +68,14 @@ const ToolBar = ({ setGridDiv, setUntilWinCounter }) => {
                 isHoveringTools={isHoveringTools}
                 isSelected={isEraserSelected}
                 label={"Reset"}
+            />
+
+            <Tool
+                onClick={revealItem}
+                icon={FaLightbulb}
+                isHoveringTools={isHoveringTools}
+                isSelected={isEraserSelected}
+                label={"Hint"}
             />
         </aside>
     );

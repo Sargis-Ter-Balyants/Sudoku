@@ -36,6 +36,7 @@ const Grid = ({ difficulty, generate, untilWinCounter, setUntilWinCounter, win, 
     const [gridDiv, setGridDiv] = React.useState<GridItemType[]>([]);
     const [isPenSelected, setIsPenSelected] = useState<boolean>(true);
     const [isEraserSelected, setIsEraserSelected] = useState<boolean>(false);
+    const [currentActiveItemIndex, setCurrentActiveItemIndex] = useState<number>(100);
 
     useEffect(() => {
         const numbers: number[][] = generateRandomSudokuNumbers();
@@ -60,6 +61,7 @@ const Grid = ({ difficulty, generate, untilWinCounter, setUntilWinCounter, win, 
                         win={false}
                         setLost={() => {}}
                         setUntilWinCounter={() => {}}
+                        setCurrentActiveItemIndex={() => {}}
                     />
                 ),
                 isClickedWithPen: false,
@@ -101,6 +103,7 @@ const Grid = ({ difficulty, generate, untilWinCounter, setUntilWinCounter, win, 
                             win,
                             setUntilWinCounter,
                             setLost,
+                            setCurrentActiveItemIndex,
                         };
 
                         return (
@@ -114,6 +117,7 @@ const Grid = ({ difficulty, generate, untilWinCounter, setUntilWinCounter, win, 
                 <ToolBar
                     setUntilWinCounter={setUntilWinCounter}
                     setGridDiv={setGridDiv}
+                    currentActiveItemIndex={currentActiveItemIndex}
                 />
             </ToolContext.Provider>
         </div>

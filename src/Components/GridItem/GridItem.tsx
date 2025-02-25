@@ -13,6 +13,7 @@ interface Props {
     setUntilWinCounter: React.Dispatch<React.SetStateAction<number>>;
     win: boolean;
     setLost: React.Dispatch<React.SetStateAction<boolean>>;
+    setCurrentActiveItemIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GridItem = ({
@@ -26,6 +27,7 @@ const GridItem = ({
     win,
     setUntilWinCounter,
     setLost,
+    setCurrentActiveItemIndex,
 }: Props) => {
     const penClicked = item?.isClickedWithPen;
     const guessedNumber = item?.guessedNumber;
@@ -51,6 +53,8 @@ const GridItem = ({
 
                     if (i === index) {
                         item.isClickedWithPen = !penClicked;
+                        if (!penClicked) setCurrentActiveItemIndex(i);
+                        else setCurrentActiveItemIndex(0);
                     }
 
                     if (
