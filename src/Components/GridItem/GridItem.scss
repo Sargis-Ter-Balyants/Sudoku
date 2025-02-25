@@ -11,10 +11,12 @@
 
     &:nth-of-type(odd) {
         animation: forwards 1s animationLeft;
+        animation-iteration-count: 1;
     }
 
     &:nth-of-type(even) {
         animation: forwards 1s animationRight;
+        animation-iteration-count: 1;
     }
 
     &:nth-of-type(3n):not(:nth-of-type(9n)) {
