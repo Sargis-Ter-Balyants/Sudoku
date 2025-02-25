@@ -89,7 +89,10 @@ const Grid = ({ difficulty, generate, untilWinCounter, setUntilWinCounter, win, 
                     setIsEraserSelected,
                 }}
             >
-                <NumberBar setGridDiv={setGridDiv} />
+                <NumberBar
+                    setUntilWinCounter={setUntilWinCounter}
+                    setGridDiv={setGridDiv}
+                />
                 <div className="grid">
                     {gridDiv.map((item: GridItemType, index: number) => {
                         const props = {

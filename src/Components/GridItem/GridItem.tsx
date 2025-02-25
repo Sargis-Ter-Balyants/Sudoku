@@ -90,6 +90,8 @@ const GridItem = ({
                     item.isClickedWithPen = !penClicked;
                     item.guessedNumber = val;
                 }
+                item.guidingItem = false;
+
                 return item;
             })
         );
