@@ -38,7 +38,11 @@ function App() {
                 </button>
             </header>
             <h1 className="dancing-script-400">
-                {lost ? "It's Okay, Try again 😊" : win ? "🎉Congratulations🎉" : "SUDOKU WORLD"}
+                {lost
+                    ? "It's Okay, Try again 😊"
+                    : win && untilWinCounter === 0
+                    ? "🎉Congratulations🎉"
+                    : "SUDOKU WORLD"}
             </h1>
             <ErrorBoundary
                 fallback={
